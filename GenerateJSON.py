@@ -40,22 +40,18 @@ def getJSON():
     
     result = {}
     result[date] = {'candidates': [], 'others': []}
+	
     for el in info:
-        candidate = {}
-        candidate['name'] = nicknames[el[0]]['name']
-        candidate['title'] = nicknames[el[0]]['title']
-        candidate['value'] = el[1]
-        if candidate['name'] not in "other noanswer notcome spoiler":
-            result[date]['candidates'].append(candidate)
-        else:
-            result[date]['others'].append(candidate)
-        
-        with open('wciom_candidates_2018.json', 'w', encoding='utf-8') as f:
-            f.write(json.dumps(result))
-
-
-# In[9]:
-
-
-getJSON()
-
+        try:
+            candidate = {}
+            candidate['name'] = nicknames[el[0]]['name']
+            candidate['title'] = nicknames[el[0]]['title']
+            candidate['value'] = el[1]
+            if candidate['name'] not in "other noanswer notcome spoiler":
+                result[date]['candidates'].append(candidate)
+            else:
+                result[date]['others'].append(candidate)
+        except:
+            pass		
+    with open('wciom_candidates_2018.json', 'w', encoding='utf-8') as f:
+        f.write(json.dumps(result))
